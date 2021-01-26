@@ -51,7 +51,7 @@ settings = {}
 
 providers = {
       'cluster-api': {
-              'componentsFile': 'core-components.yaml',
+              'componentsFile': 'core-components_reference.yaml',
               'nextVersion': 'v0.3.8',
               'type': 'CoreProvider',
       },
