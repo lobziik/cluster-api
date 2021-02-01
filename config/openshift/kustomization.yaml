@@ -1,3 +1,4 @@
+namePrefix: ocp-capi-
 namespace: openshift-cluster-api
 
 commonLabels:
@@ -5,8 +6,12 @@ commonLabels:
 
 bases:
   - crd
-  - webhook
   - ../default
+  - webhook
+
+patchesStrategicMerge:
+  - manager_webhook_patch.yaml # crutch, related to webhooks but need to be there for successfull build. TODO: figure out
+  - webhook_service_patch.yaml
 
 patchesJson6902:
   - target:

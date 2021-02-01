@@ -491,26 +491,6 @@ release-manifests: $(RELEASE_DIR) $(KUSTOMIZE) ## Builds the manifests to publis
 	echo "---" >> $(RELEASE_DIR)/cluster-api-components.yaml
 	cat $(RELEASE_DIR)/control-plane-components.yaml >> $(RELEASE_DIR)/cluster-api-components.yaml
 
-.PHONY: release-manifests-openshift
-release-manifests-openshift: $(RELEASE_DIR) $(KUSTOMIZE) ## Builds openshift specific manifests
-	mkdir -p $(RELEASE_DIR)/openshift
-	# Build core-components.
-	$(KUSTOMIZE) build --load_restrictor=LoadRestrictionsNone config/openshift > $(RELEASE_DIR)/openshift/core-components.yaml
-#	# Build bootstrap-components.
-#	$(KUSTOMIZE) build bootstrap/kubeadm/config > $(RELEASE_DIR)/bootstrap-components.yaml
-#	# Build control-plane-components.
-#	$(KUSTOMIZE) build controlplane/kubeadm/config > $(RELEASE_DIR)/control-plane-components.yaml
-
-	## Build cluster-api-components (aggregate of all of the above).
-#	cat $(RELEASE_DIR)/openshift/core-components_reference.yaml > $(RELEASE_DIR)/openshift/cluster-api-components.yaml
-#	echo "---" >> $(RELEASE_DIR)/openshift/cluster-api-components.yaml
-
-
-#	cat $(RELEASE_DIR)/bootstrap-components.yaml >> $(RELEASE_DIR)/cluster-api-components.yaml
-#	echo "---" >> $(RELEASE_DIR)/cluster-api-components.yaml
-#	cat $(RELEASE_DIR)/control-plane-components.yaml >> $(RELEASE_DIR)/cluster-api-components.yaml
-
-
 .PHONY: release-manifests-dev
 release-manifests-dev: ## Builds the development manifests and copies them in the release folder
 	# Release CAPD components and add them to the release dir
